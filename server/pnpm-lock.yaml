@@ -8,9 +8,18 @@ dependencies:
   '@hono/node-server':
     specifier: ^1.7.0
     version: 1.7.0
+  '@hono/trpc-server':
+    specifier: ^0.1.0
+    version: 0.1.0(@trpc/server@10.45.0)(hono@3.12.8)
+  '@trpc/server':
+    specifier: ^10.45.0
+    version: 10.45.0
   hono:
     specifier: ^3.12.8
     version: 3.12.8
+  zod:
+    specifier: ^3.22.4
+    version: 3.22.4
 
 devDependencies:
   tsx:
@@ -222,6 +231,21 @@ packages:
     engines: {node: '>=18.14.1'}
     dev: false
 
+  /@hono/trpc-server@0.1.0(@trpc/server@10.45.0)(hono@3.12.8):
+    resolution: {integrity: sha512-tgXG/ndgHxLqC09o1bwq8SzLLgzwoCr6KBRDdz9l0k7p0yuW5h67oVSUxCbmFp94hP+ahdIyqnRL84Aw8GvZxQ==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      '@trpc/server': ^10.10.0
+      hono: 3.*
+    dependencies:
+      '@trpc/server': 10.45.0
+      hono: 3.12.8
+    dev: false
+
+  /@trpc/server@10.45.0:
+    resolution: {integrity: sha512-2Fwzv6nqpE0Ie/G7PeS0EVR89zLm+c1Mw7T+RAGtU807j4oaUx0zGkBXTu5u9AI+j+BYNN2GZxJcuDTAecbr1A==}
+    dev: false
+
   /buffer-from@1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
     dev: true
@@ -301,3 +325,7 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
+
+  /zod@3.22.4:
+    resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
+    dev: false

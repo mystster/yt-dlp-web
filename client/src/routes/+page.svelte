@@ -1,7 +1,22 @@
-<script>
+<script lang="ts">
 	import Counter from './Counter.svelte';
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	import { createTRPCProxyClient, httpBatchLink } from '@trpc/client'
+	import type { AppRouter } from '../../../server/route/router'
+
+const client = createTRPCProxyClient<AppRouter>({
+  links: [
+    httpBatchLink({
+      url: 'http://localhost:3000/trpc',
+    }),
+  ],
+})
+
+const f = async () => {
+	console.log(await client.hello.query('Hono'))
+}
+f();
 </script>
 
 <svelte:head>

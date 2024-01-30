@@ -1,0 +1,52 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+	"name": "${localWorkspaceFolderBasename}",
+	// Update the 'dockerComposeFile' list if you have more compose files or use different names.
+	"dockerComposeFile": "docker-compose.yml",
+
+	// The 'service' property is the name of the service for the container that VS Code should
+	// use. Update this value and .devcontainer/docker-compose.yml to the real service name.
+	"service": "app",
+
+	// The 'workspaceFolder' property is the path VS Code should open by default when
+	// connected. Corresponds to a volume mount in .devcontainer/docker-compose.yml
+	"workspaceFolder": "/workspace",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.shellIntegration.enabled": true,
+				"terminal.integrated.defaultProfile.linux": "zsh",
+				"dotfiles.repository": "mystster/dotfiles",
+				"dotfiles.installCommand": ".config/install.sh"
+			},
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"GitHub.vscode-pull-request-github",
+				"eamodio.gitlens",
+				"VisualStudioExptTeam.vscodeintellicode",
+				"VisualStudioExptTeam.intellicode-api-usage-examples",
+				"esbenp.prettier-vscode",
+				"svelte.svelte-vscode",
+				"albert.TabOut"
+			]
+		}
+	},
+
+	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
+	// "shutdownAction": "none",
+
+	// Comment out to connect as root instead. To add a non-root user, see: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "node",
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	"remoteEnv": {
+		"XDG_ROOT_HOME" : "/home/node/dotfiles",
+		"RUST_INSTALL" : "false",
+		"PNPM_INSTALL" : "true"
+	}
+}

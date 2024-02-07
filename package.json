@@ -34,6 +34,10 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@trpc/client": "^10.45.0"
+		"@sveltejs/adapter-node": "^4.0.1",
+		"@trpc/client": "^10.45.0",
+		"@trpc/server": "^10.45.0",
+		"delay": "^6.0.0",
+		"trpc-sveltekit": "^3.5.26"
 	}
 }

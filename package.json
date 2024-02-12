@@ -39,6 +39,7 @@
 		"@trpc/client": "^10.45.0",
 		"@trpc/server": "^10.45.0",
 		"delay": "^6.0.0",
-		"trpc-sveltekit": "^3.5.26"
+		"trpc-sveltekit": "^3.5.26",
+		"yt-dlp-wrap": "^2.3.12"
 	}
 }

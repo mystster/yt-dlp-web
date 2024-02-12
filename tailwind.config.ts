@@ -20,7 +20,7 @@ const config = {
 	},
 	plugins: [
 		skeleton({
-			themes: { preset: [ "sahara" ] }
+			themes: { preset: [ "hamlindigo" ] }
 		})
 	]
 } satisfies Config;

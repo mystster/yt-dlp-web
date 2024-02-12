@@ -3,13 +3,13 @@
 	import Counter from './Counter.svelte';
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
-	import {trpc} from "$lib/trpc/client";
+	import { trpc } from '$lib/trpc/client';
 
-
-const f = async () => {
-	console.log(await trpc($page).greeting.query());
-}
-f();
+	const f = async () => {
+		console.log(await trpc($page).greeting.query());
+		console.log(await trpc($page).videos.getInfo.query("aaaaaaa"))
+	};
+	f();
 </script>
 
 <svelte:head>

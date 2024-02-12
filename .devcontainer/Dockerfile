@@ -14,13 +14,17 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 COPY library-scripts/*.sh library-scripts/*.env /tmp/library-scripts/
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+RUN export DEBIAN_FRONTEND=noninteractive \
     && /bin/bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
     #
     # ****************************************************************************
     # * TODO: Add any additional OS packages you want included in the definition *
     # * here. We want to do this before cleanup to keep the "layer" small.       *
     # ****************************************************************************
+    # https://hub.docker.com/layers/phyzical/yt-dlp/latest/images/sha256-2c03357731c55cccee5bbf9af1c1528bff5557d6bd4f2af8f8c98005e592c0e0?context=explore
+    && apt-get install python3 python3-pip ffmpeg -y --no-install-recommends \
+    && python3 -m pip install --break-system-packages --upgrade wheel \
+    && python3 -m pip install --break-system-packages --upgrade yt-dlp \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
 
 # [Optional] Uncomment if you want to install an additional version of node using nvm

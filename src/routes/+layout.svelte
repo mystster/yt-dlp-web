@@ -1,8 +1,23 @@
-<script>
+<script lang="ts">
 	import '../app.pcss';
-	import Header from './Header.svelte';
 	import './styles.css';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
+	import { trpc } from '$lib/trpc/client';
+	import { page } from '$app/stores';
+	import type {dumpSingleJson} from '$lib/types/dumpSingleJson';
+
+	let url="";
+	async function getVideoInfo() {
+		if (url) {
+			try {
+				const json= await trpc($page).videos.getInfo.query(url) as dumpSingleJson;
+				console.log(json);
+			} catch (error: any) {
+				console.log(`error!!!\n${error.message}`);
+				console.dir(error);
+			}
+		}
+	}
 
 </script>
 <AppShell>
@@ -13,38 +28,13 @@
 				<strong class="text-xl uppercase">Skeleton</strong>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://discord.gg/EXqV7W8MtY"
-					target="_blank"
-					rel="noreferrer"
-				>
-					Discord
-				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://twitter.com/SkeletonUI"
-					target="_blank"
-					rel="noreferrer"
-				>
-					Twitter
-				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface"
-					href="https://github.com/skeletonlabs/skeleton"
-					target="_blank"
-					rel="noreferrer"
-				>
-					GitHub
-				</a>
+				<input type="text" class="input" placeholder="download url" bind:value={url}>
+				<button type="button" class="btn variant-filled" on:click={getVideoInfo}>Add</button>
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
 	<!-- Page Route Content -->
 	<slot />
-	<svelte:fragment slot="footer">
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-	</svelte:fragment>
 </AppShell>
 
 <style>

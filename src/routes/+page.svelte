@@ -7,7 +7,6 @@
 
 	const f = async () => {
 		console.log(await trpc($page).greeting.query());
-		console.log(await trpc($page).videos.getInfo.query("aaaaaaa"))
 	};
 	f();
 </script>

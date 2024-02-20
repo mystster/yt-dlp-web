@@ -4,9 +4,9 @@
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 	import { trpc } from '$lib/trpc/client';
 	import { page } from '$app/stores';
-	import type {dumpSingleJson} from '$lib/types/dumpSingleJson';
+	import type { dumpSingleJson } from '$lib/types/dumpSingleJson';
 
-	let url="";
+	let url = '';
 	async function getVideoInfo() {
 		if (url) {
 			try {
@@ -20,8 +20,8 @@
 			}
 		}
 	}
-
 </script>
+
 <AppShell>
 	<svelte:fragment slot="header">
 		<!-- App Bar -->
@@ -30,8 +30,15 @@
 				<strong class="text-xl uppercase">Skeleton</strong>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
-				<input type="text" class="input" placeholder="download url" bind:value={url}>
-				<button type="button" class="btn variant-filled" on:click={getVideoInfo}>Add</button>
+				<input
+					type="text"
+					class="input"
+					placeholder="download url"
+					bind:value={url}
+				/>
+				<button type="button" class="variant-filled btn" on:click={getVideoInfo}
+					>Add</button
+				>
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>

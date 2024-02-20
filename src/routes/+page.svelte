@@ -32,11 +32,15 @@
 		try editing <strong>src/routes/+page.svelte</strong>
 	</h2>
 
-		<section>
-		<a class="btn variant-filled-primary" href="https://kit.svelte.dev/">SvelteKit</a>
-		<a class="btn variant-filled-secondary" href="https://tailwindcss.com/">Tailwind</a>
-		<a class="btn variant-filled-tertiary" href="https://github.com/">GitHub</a>
-		<button type="button" class="btn variant-filled">Button</button>
+	<section>
+		<a class="variant-filled-primary btn" href="https://kit.svelte.dev/"
+			>SvelteKit</a
+		>
+		<a class="variant-filled-secondary btn" href="https://tailwindcss.com/"
+			>Tailwind</a
+		>
+		<a class="variant-filled-tertiary btn" href="https://github.com/">GitHub</a>
+		<button type="button" class="variant-filled btn">Button</button>
 	</section>
 	<Counter />
 </section>

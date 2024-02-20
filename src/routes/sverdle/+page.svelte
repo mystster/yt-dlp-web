@@ -58,9 +58,7 @@
 	 * if client-side JavaScript is enabled
 	 */
 	function update(event: MouseEvent) {
-		const key = (event.target as HTMLButtonElement).getAttribute(
-			'data-key'
-		);
+		const key = (event.target as HTMLButtonElement).getAttribute('data-key');
 
 		if (key === 'backspace') {
 			currentGuess = currentGuess.slice(0, -1);
@@ -119,7 +117,13 @@
 					{@const exact = answer === 'x'}
 					{@const close = answer === 'c'}
 					{@const missing = answer === '_'}
-					<div class="letter" class:exact class:close class:missing class:selected>
+					<div
+						class="letter"
+						class:exact
+						class:close
+						class:missing
+						class:selected
+					>
 						{value}
 						<span class="visually-hidden">
 							{#if exact}
@@ -149,7 +153,11 @@
 			</button>
 		{:else}
 			<div class="keyboard">
-				<button data-key="enter" class:selected={submittable} disabled={!submittable}>enter</button>
+				<button
+					data-key="enter"
+					class:selected={submittable}
+					disabled={!submittable}>enter</button
+				>
 
 				<button
 					on:click|preventDefault={update}
@@ -192,7 +200,7 @@
 			force: 0.7,
 			stageWidth: window.innerWidth,
 			stageHeight: window.innerHeight,
-			colors: ['#ff3e00', '#40b3ff', '#676778']
+			colors: ['#ff3e00', '#40b3ff', '#676778'],
 		}}
 	/>
 {/if}

@@ -9,7 +9,7 @@ export const router = t.router({
 		await delay(500); // 👈 simulate an expensive operation
 		return `Hello tRPC v10 @ ${new Date().toLocaleTimeString()}`;
 	}),
-	videos
+	videos,
 });
 
 export type Router = typeof router;

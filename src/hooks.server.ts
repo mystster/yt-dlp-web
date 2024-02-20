@@ -8,7 +8,7 @@ import net from 'net';
 import type { id } from 'socio/types.js';
 import type { SocioSession } from 'socio/core-session.js';
 
-import {db} from '$lib/db/db';
+import { db } from '$lib/db/db';
 
 export const handle: Handle = createTRPCHandle({ router, createContext });
 
@@ -21,7 +21,7 @@ porttest.once('listening', () => {
 			{ port: 3000 },
 			{
 				db: db_interface,
-				logging: { verbose: true, hard_crash: false }
+				logging: { verbose: true, hard_crash: false },
 			}
 		);
 		console.log('database is ready');
@@ -33,10 +33,12 @@ porttest.on('error', () => console.log('socio server already running'));
 porttest.listen(3000);
 
 function SetUpDB() {
-	db.prepare('create table status(ID INTEGER PRIMARY KEY, PERCENT INTEGER)').run();
+	db.prepare(
+		'create table status(ID INTEGER PRIMARY KEY, PERCENT INTEGER)'
+	).run();
 	db.prepare('insert into status (ID, PERCENT) values (1, 50)').run();
 	return {
 		Query: (client: SocioSession, id: id, sql: string, params: any) =>
-			db.prepare(sql).get(params) as Promise<object>
+			db.prepare(sql).get(params) as Promise<object>,
 	};
 }

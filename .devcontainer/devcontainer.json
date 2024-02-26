@@ -20,7 +20,7 @@
 				"terminal.integrated.shellIntegration.enabled": true,
 				"terminal.integrated.defaultProfile.linux": "zsh",
 				"dotfiles.repository": "mystster/dotfiles",
-				"dotfiles.installCommand": ".config/install.sh"
+				"dotfiles.installCommand": ".config/install.sh",
 			},
 			"extensions": [
 				"dbaeumer.vscode-eslint",
@@ -30,9 +30,9 @@
 				"VisualStudioExptTeam.intellicode-api-usage-examples",
 				"esbenp.prettier-vscode",
 				"svelte.svelte-vscode",
-				"albert.TabOut"
-			]
-		}
+				"albert.TabOut",
+			],
+		},
 	},
 
 	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
@@ -45,8 +45,8 @@
 	// "forwardPorts": [],
 
 	"remoteEnv": {
-		"XDG_ROOT_HOME" : "/home/node/dotfiles",
-		"RUST_INSTALL" : "false",
-		"PNPM_INSTALL" : "true"
-	}
+		"XDG_ROOT_HOME": "/home/node/dotfiles",
+		"RUST_INSTALL": "false",
+		"PNPM_INSTALL": "true",
+	},
 }

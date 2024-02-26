@@ -5,18 +5,19 @@
 	import { trpc } from '$lib/trpc/client';
 	import { page } from '$app/stores';
 	import type { dumpSingleJson } from '$lib/types/dumpSingleJson';
-	import mqtt from 'mqtt';
-	
-	const client = mqtt.connect('ws://localhost:1883');
-	client.on('connect', () => {
-		console.log('mqtt client connected');
-		client.subscribe('test-topic', (err) => {
+	import { mqttClient } from '$lib/mqtt/client';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		mqttClient.subscribe('test-topic', (err) => {
 			if(!err){
 				console.log('test-topic subscribed');
 			}
 		});
+		mqttClient.on('message', (topic, message, packet) => {
+			console.log(`{${message}} from ${topic}`);
+		});
 	});
-	client.on('message', () => {console.log('message recieved')});
 
 
 	let url = '';
@@ -58,38 +59,5 @@
 </AppShell>
 
 <style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
 
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
 </style>

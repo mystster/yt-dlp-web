@@ -1,12 +1,9 @@
-import mqtt from 'mqtt'; // import namespace "mqtt"
+import { mqttClient } from "$lib/mqtt/client";
 
 function worker() {
 	console.log('Hello from worker');
 
-	const client = mqtt.connect('ws://localhost:1883');
-	client.on('connect', () => {
-		client.publish('test-topic', 'test with mqtt');
-	});
+	mqttClient.publish('test-topic', 'test with mqtt');
 }
 
 export default worker;

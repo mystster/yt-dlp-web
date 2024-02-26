@@ -5,15 +5,29 @@
 	import { trpc } from '$lib/trpc/client';
 	import { page } from '$app/stores';
 	import type { dumpSingleJson } from '$lib/types/dumpSingleJson';
+	import mqtt from 'mqtt';
+	
+	const client = mqtt.connect('ws://localhost:1883');
+	client.on('connect', () => {
+		console.log('mqtt client connected');
+		client.subscribe('test-topic', (err) => {
+			if(!err){
+				console.log('test-topic subscribed');
+			}
+		});
+	});
+	client.on('message', () => {console.log('message recieved')});
+
 
 	let url = '';
 	async function getVideoInfo() {
+		// client.publish('message', "connected");
 		if (url) {
 			try {
-				// const json= await trpc($page).videos.getInfo.query(url) as dumpSingleJson;
-				// console.log(json);
-				const json = await fetch(`/api?videourl=${url}`);
-				console.log(await json.json());
+				const json= await trpc($page).videos.getInfo.query(url) as dumpSingleJson;
+				console.log(json);
+				//const json = await fetch(`/api?videourl=${url}`);
+				// console.log(await json.json());
 			} catch (error: any) {
 				console.log(`error!!!\n${error.message}`);
 				console.dir(error);

@@ -21,13 +21,10 @@
 
 	let url = '';
 	async function getVideoInfo() {
-		// client.publish('message', "connected");
 		if (url) {
 			try {
 				const json= await trpc($page).videos.getInfo.query(url) as dumpSingleJson;
 				console.log(json);
-				//const json = await fetch(`/api?videourl=${url}`);
-				// console.log(await json.json());
 			} catch (error: any) {
 				console.log(`error!!!\n${error.message}`);
 				console.dir(error);

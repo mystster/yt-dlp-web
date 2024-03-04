@@ -7,6 +7,7 @@
 	import type { dumpSingleJson } from '$lib/types/dumpSingleJson';
 	import { mqttClient } from '$lib/mqtt/client';
 	import { onMount } from 'svelte';
+	import type { OnMessageCallback } from 'mqtt';
 
 	onMount(() => {
 		mqttClient.subscribe('test-topic', (err) => {
@@ -14,11 +15,17 @@
 				console.log('test-topic subscribed');
 			}
 		});
-		mqttClient.on('message', (topic, message, packet) => {
+		const onMessage: OnMessageCallback =  (topic, message, packet) => {
 			console.log(`{${message}} from ${topic}`);
-		});
-	});
+		};
+		mqttClient.on('message', onMessage);
 
+		return ()=>{
+			mqttClient.off('message', onMessage);
+			mqttClient.unsubscribe('test-topic');
+			console.log('test-topic unsubscribed');
+		}
+	});
 
 	let url = '';
 	async function getVideoInfo() {

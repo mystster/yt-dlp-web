@@ -1,13 +1,20 @@
 <script lang="ts">
 	import '../app.pcss';
 	import './styles.css';
-	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
+	import { AppShell, AppBar, type ModalComponent } from '@skeletonlabs/skeleton';
 	import { trpc } from '$lib/trpc/client';
 	import { page } from '$app/stores';
 	import type { dumpSingleJson } from '$lib/types/dumpSingleJson';
 	import { mqttClient } from '$lib/mqtt/client';
 	import { onMount } from 'svelte';
 	import type { OnMessageCallback } from 'mqtt';
+	import { initializeStores, Modal } from '@skeletonlabs/skeleton';
+	import { getModalStore } from '@skeletonlabs/skeleton';
+	import AddVideoPopup from '$lib/components/addVideoPopup.svelte';
+
+	initializeStores();
+
+	const modalStore = getModalStore();
 
 	onMount(() => {
 		mqttClient.subscribe('test-topic', (err) => {
@@ -33,6 +40,15 @@
 			try {
 				const json= await trpc($page).videos.getInfo.query(url) as dumpSingleJson;
 				console.log(json);
+				const modalComponent: ModalComponent = {
+					ref: AddVideoPopup,
+					props: {jsonData: json},
+				};
+				modalStore.trigger({
+					type: 'component',
+					component: modalComponent,
+					
+				});
 			} catch (error: any) {
 				console.log(`error!!!\n${error.message}`);
 				console.dir(error);
@@ -41,6 +57,7 @@
 	}
 </script>
 
+<Modal />
 <AppShell>
 	<svelte:fragment slot="header">
 		<!-- App Bar -->

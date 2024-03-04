@@ -17,6 +17,35 @@ export const videos = router({
 				ffprobe: 'ffprobe',
 			});
 			const process = yt.dumpSingleJson().run();
+			process.stdout.on('data', (str) => (result += str));
+			process.stderr.on('data', (str) => (error += str));
+			process.on('close', () =>
+				error ? reject(error) : resolve(JSON.parse(result))
+			);
+		});
+	}),
+	downloadVideo: defaultProcedure
+		.input(
+			z.object({
+				url: z.string().url(),
+				codec: z.string(),
+			})
+		)
+		.mutation(async ({ input }) => {
+			return new Promise((resolve, reject) => {
+				const yt = new fluentYTDlp(input.url);
+				let result: string = '';
+				let error: string = '';
+				yt.setBinaryPath({
+					ytdlp: 'yt-dlp',
+					ffmpeg: 'ffmpeg',
+					ffprobe: 'ffprobe',
+				});
+				const process = yt
+					.format(input.codec)
+					.paths('/workspaces/yt-dlp-web')
+					.extension('mp4')
+					.run();
 				process.stdout.on('data', (str) => (result += str));
 				process.stderr.on('data', (str) => (error += str));
 				process.on('close', () =>

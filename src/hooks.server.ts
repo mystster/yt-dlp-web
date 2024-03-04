@@ -1,5 +1,5 @@
 import { createContext } from '$lib/trpc/context';
-import { router } from '$lib/trpc/router';
+import { appRouter } from '$lib/trpc/router';
 import type { Handle } from '@sveltejs/kit';
 import { createTRPCHandle } from 'trpc-sveltekit';
 import portscanner from 'portscanner';
@@ -8,7 +8,7 @@ import { PUBLIC_MQTT_WEBSOCKET_PORT } from '$env/static/public';
 import Aedes from 'aedes';
 import { createServer } from 'aedes-server-factory';
 
-export const handle: Handle = createTRPCHandle({ router, createContext });
+export const handle: Handle = createTRPCHandle({ router: appRouter, createContext: createContext });
 const port = parseInt(PUBLIC_MQTT_WEBSOCKET_PORT); 
 
 portscanner.checkPortStatus( port, 'localhost', (err, status) => {

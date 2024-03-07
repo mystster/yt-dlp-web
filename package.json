@@ -13,7 +13,7 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
-		"@fontsource/fira-mono": "^4.5.10",
+		"@fontsource/fira-mono": "^5.0.0",
 		"@neoconfetti/svelte": "^1.0.0",
 		"@skeletonlabs/skeleton": "^2.8.0",
 		"@skeletonlabs/tw-plugin": "^0.3.1",
